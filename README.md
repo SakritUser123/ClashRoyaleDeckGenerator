@@ -16,13 +16,13 @@ Easy to customize and extend
 
 ## 🛠️ How It Works
 
-Clash Royale cards are organized into categorized pools (win conditions, spells, defense, support, cycle, etc.).
+-Clash Royale cards are organized into categorized pools (win conditions, spells, defense, support, cycle, etc.).
 
-The generator selects cards according to predefined balancing rules.
+-The generator selects cards according to predefined balancing rules.
 
-Logic ensures decks are reasonable and usable in real matches.
+-Logic ensures decks are reasonable and usable in real matches.
 
-Results are presented in a clean, readable format.
+-Results are presented in a clean, readable format.
 
 ## 📦 Example Output
 - Hog Rider
@@ -41,6 +41,7 @@ Average Elixir Cost: 2.9
 ## 🧑‍💻 Installation
 
 git clone https://github.com/SakritUser123/ClashRoyaleDeckGenerator.git
+
 cd ClashRoyaleDeckGenerator
 
 Run the generator:
