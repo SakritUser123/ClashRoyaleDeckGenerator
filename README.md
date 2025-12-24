@@ -1,11 +1,9 @@
-# ClashRoyaleDeckGenerator
 
 # 🃏 Clash Royale Deck Generator
 
 A simple and efficient Clash Royale Deck Generator that helps players create balanced and creative decks automatically. This project is designed to encourage experimentation and improve deck-building skills rather than relying only on meta decks.
 
 ## 🚀 Features
-----------------------------------------------------------------------------------------------------------------
 Generates valid 8-card Clash Royale decks
 
 Focuses on balance and synergy
@@ -17,7 +15,7 @@ Randomized yet playable deck generation
 Easy to customize and extend
 
 ## 🛠️ How It Works
---------------------------------------------------------------------------------------------------------------------
+
 Clash Royale cards are organized into categorized pools (win conditions, spells, defense, support, cycle, etc.).
 
 The generator selects cards according to predefined balancing rules.
@@ -41,7 +39,7 @@ Average Elixir Cost: 2.9
 
 
 ## 🧑‍💻 Installation
-------------------------------------------------------------------------------------------------------------------------
+
 git clone https://github.com/SakritUser123/ClashRoyaleDeckGenerator.git
 cd ClashRoyaleDeckGenerator
 
@@ -51,7 +49,7 @@ python main.py
 
 
 ## 🔧 Customization
---------------------------------------------------------------------------------------------------------------------------
+
 You can easily modify:
 
 - Card pools and categories
@@ -64,7 +62,7 @@ You can easily modify:
 
 
 ## 📈 Future Improvements
---------------------------------------------------------------------------------------------------------------------------
+
 - Meta-aware deck generation
 
 - Card synergy scoring
@@ -77,7 +75,7 @@ You can easily modify:
 
 
 ## ⚠️ Disclaimer
---------------------------------------------------------------------------------------------------------------------------------
+
 This project is not affiliated with Supercell.
 Clash Royale and its assets are trademarks of Supercell.
 
