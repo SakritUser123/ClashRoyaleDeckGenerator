@@ -36,7 +36,7 @@ st.markdown("""
     </style>
 
     <div id="splash">
-        <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Clash_Royale_logo.png">
+        <img src="https://www.pizap.com/logo_maker_app">
     </div>
 """, unsafe_allow_html=True)
 
