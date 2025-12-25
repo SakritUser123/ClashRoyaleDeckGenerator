@@ -13,42 +13,56 @@ url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/
 image = Image.open(urlopen(url))
 
 
+import streamlit as st
 
-# Splash screen HTML + CSS
 st.markdown("""
-    <style>
-        /* Fullscreen overlay */
-        #splash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeout 3s forwards;
-            animation-delay: 2s; /* Show logo for 2 seconds before fading */
-        }
+<style>
+/* Fullscreen overlay */
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
-        #splash img {
-            width: 400px;
-        }
+#splash img {
+    width: 400px;
+    z-index: 10000; /* make sure image is above everything */
+}
 
-        @keyframes fadeout {
-            from {opacity: 1;}
-            to {opacity: 0; visibility: hidden;}
-        }
-    </style>
+/* Fade out animation */
+.fade-out {
+    animation: fadeout 2s forwards;
+}
 
-    <div id="splash">
-        <img src=image>
-    </div>
+@keyframes fadeout {
+    from {opacity: 1;}
+    to {opacity: 0; visibility: hidden;}
+}
+</style>
+
+<div id="splash">
+    <img src=image>
+</div>
+
+<script>
+    // Wait 2 seconds, then fade out
+    setTimeout(function(){
+        document.getElementById('splash').classList.add('fade-out');
+    }, 2000);
+    // Remove splash from DOM after fade
+    setTimeout(function(){
+        var splash = document.getElementById('splash');
+        if (splash) splash.remove();
+    }, 4000);
+</script>
 """, unsafe_allow_html=True)
-
-
 
 
 if st.button("Predict!"):
