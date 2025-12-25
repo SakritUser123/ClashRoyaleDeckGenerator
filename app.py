@@ -4,37 +4,42 @@ st.header(" Clash Royale Deck Generator AI")
 
 playerID = st.text_input("Enter Player ID: ", key="player_id_key")
 
-import time
-
 st.set_page_config(page_title="Clash Royale App", layout="centered")
 
-# Create a container for the splash screen
-splash = st.empty()
+# Splash screen HTML + CSS
+st.markdown("""
+    <style>
+        /* Fullscreen overlay */
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeout 3s forwards;
+            animation-delay: 2s; /* Show logo for 2 seconds before fading */
+        }
 
-# URL of Clash Royale logo
-logo_url = "https://upload.wikimedia.org/wikipedia/en/6/6b/Clash_Royale_logo.png"
+        #splash img {
+            width: 400px;
+        }
 
-# Fade-out effect: gradually reduce opacity
-for opacity in range(100, -1, -5):
-    splash.markdown(
-        f"""
-        <div style="
-            background-color:black;
-            width:100vw;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-        ">
-            <img src="{logo_url}" style="width:400px; opacity:{opacity/100}; transition: opacity 0.2s;">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-    time.sleep(0.05)
+        @keyframes fadeout {
+            from {opacity: 1;}
+            to {opacity: 0; visibility: hidden;}
+        }
+    </style>
 
-# Remove splash
-splash.empty()
+    <div id="splash">
+        <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Clash_Royale_logo.png">
+    </div>
+""", unsafe_allow_html=True)
+
 
 
 
