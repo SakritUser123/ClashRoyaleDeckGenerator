@@ -9,8 +9,6 @@ playerID = st.text_input("Enter Player ID: ", key="player_id_key")
 st.set_page_config(page_title="Clash Royale App", layout="centered")
 
 
-
-
 url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/refs/heads/main/colored-logo.png"
 #image = Image.open(urlopen(url))
 
@@ -46,7 +44,7 @@ st.markdown("""
     </style>
 
     <div id="splash">
-        <img src=urlopen(url)>
+        <img src=url>
     </div>
 """, unsafe_allow_html=True)
 
