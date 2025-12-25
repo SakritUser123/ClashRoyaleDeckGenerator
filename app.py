@@ -1,4 +1,6 @@
 import streamlit as st
+from urllib.request import urlopen
+from PIL import Image
 st.header(" Clash Royale Deck Generator AI")
 
 
@@ -7,11 +9,10 @@ playerID = st.text_input("Enter Player ID: ", key="player_id_key")
 st.set_page_config(page_title="Clash Royale App", layout="centered")
 
 
-from urllib.request import urlopen
-from PIL import Image
+
 
 url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/refs/heads/main/colored-logo.png"
-image = Image.open(urlopen(url))
+#image = Image.open(urlopen(url))
 
 #st.image(image, width=400)
 
@@ -45,7 +46,7 @@ st.markdown("""
     </style>
 
     <div id="splash">
-        <img src=image>
+        <img src=urlopen(url)>
     </div>
 """, unsafe_allow_html=True)
 
