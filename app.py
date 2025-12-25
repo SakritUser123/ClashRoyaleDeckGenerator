@@ -4,6 +4,18 @@ st.header(" Clash Royale Deck Generator AI")
 
 playerID = st.text_input("Enter Player ID: ", key="player_id_key")
 
+st.markdown("""
+  <style>
+    body {
+        opacity: 0;
+        animation: fadeIn 1.2s ease-in forwards;
+    }
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+  </style>
+""", unsafe_allow_html=True)
+
 
 if st.button("Predict!"):
    
