@@ -10,9 +10,9 @@ st.set_page_config(page_title="Clash Royale App", layout="centered")
 
 
 url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/refs/heads/main/colored-logo.png"
-#image = Image.open(urlopen(url))
+image = Image.open(urlopen(url))
 
-#st.image(image, width=400)
+
 
 # Splash screen HTML + CSS
 st.markdown("""
@@ -44,7 +44,7 @@ st.markdown("""
     </style>
 
     <div id="splash">
-        <img src=url>
+        <img src=image>
     </div>
 """, unsafe_allow_html=True)
 
