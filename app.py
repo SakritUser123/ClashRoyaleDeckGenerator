@@ -36,7 +36,7 @@ st.markdown("""
     </style>
 
     <div id="splash">
-        <img src="colored-logo.png">
+        <img src="https://github.com/SakritUser123/ClashRoyaleDeckGenerator/edit/main/colored-logo.png">
     </div>
 """, unsafe_allow_html=True)
 
