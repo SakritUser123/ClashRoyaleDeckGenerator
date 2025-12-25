@@ -12,6 +12,9 @@ st.set_page_config(page_title="Clash Royale App", layout="centered")
 url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/refs/heads/main/colored-logo.png"
 image = Image.open(urlopen(url))
 
+st.image(image, width=400)
+time.sleep(2)  # Show for 2 seconds
+st.empty()  # Clear the logo
 
 import streamlit as st
 
@@ -47,21 +50,7 @@ st.markdown("""
 }
 </style>
 
-<div id="splash">
-    <img src=image>
-</div>
 
-<script>
-    // Wait 2 seconds, then fade out
-    setTimeout(function(){
-        document.getElementById('splash').classList.add('fade-out');
-    }, 2000);
-    // Remove splash from DOM after fade
-    setTimeout(function(){
-        var splash = document.getElementById('splash');
-        if (splash) splash.remove();
-    }, 4000);
-</script>
 """, unsafe_allow_html=True)
 
 
