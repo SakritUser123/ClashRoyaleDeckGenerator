@@ -6,45 +6,35 @@ playerID = st.text_input("Enter Player ID: ", key="player_id_key")
 
 import time
 
-# Hide Streamlit default menu and footer
-st.set_page_config(page_title="Clash Royale App", page_icon=":crossed_swords:", layout="centered")
+st.set_page_config(page_title="Clash Royale App", layout="centered")
 
-# CSS for full screen black background
-st.markdown("""
-    <style>
-    .splash {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 2s;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# Create a container for the splash screen
+splash = st.empty()
 
-# Add the splash screen with the logo
-st.markdown("""
-    <div class="splash" id="splash">
-        <img src="https://upload.wikimedia.org/wikipedia/en/6/6b/Clash_Royale_logo.png" width="400">
-    </div>
-""", unsafe_allow_html=True)
+# URL of Clash Royale logo
+logo_url = "https://upload.wikimedia.org/wikipedia/en/6/6b/Clash_Royale_logo.png"
 
-# Wait a few seconds then fade out
-time.sleep(2)
+# Fade-out effect: gradually reduce opacity
+for opacity in range(100, -1, -5):
+    splash.markdown(
+        f"""
+        <div style="
+            background-color:black;
+            width:100vw;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        ">
+            <img src="{logo_url}" style="width:400px; opacity:{opacity/100}; transition: opacity 0.2s;">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+    time.sleep(0.05)
 
-# Use JavaScript to fade out the logo
-st.markdown("""
-<script>
-document.getElementById('splash').style.opacity = '0';
-setTimeout(function(){document.getElementById('splash').style.display='none';}, 2000);
-</script>
-""", unsafe_allow_html=True)
+# Remove splash
+splash.empty()
 
 
 
