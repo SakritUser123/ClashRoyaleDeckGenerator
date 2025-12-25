@@ -36,7 +36,7 @@ st.markdown("""
     </style>
 
     <div id="splash">
-        <img src="https://www.pizap.com/logo_maker_app">
+        <img src="colored-logo.png">
     </div>
 """, unsafe_allow_html=True)
 
