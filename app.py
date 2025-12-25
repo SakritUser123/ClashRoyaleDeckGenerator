@@ -1,12 +1,10 @@
 import streamlit as st
 from urllib.request import urlopen
 from PIL import Image
+import time
 st.header(" Clash Royale Deck Generator AI")
 
 
-playerID = st.text_input("Enter Player ID: ", key="player_id_key")
-
-st.set_page_config(page_title="Clash Royale App", layout="centered")
 
 
 url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/refs/heads/main/colored-logo.png"
@@ -18,40 +16,10 @@ st.empty()  # Clear the logo
 
 import streamlit as st
 
-st.markdown("""
-<style>
-/* Fullscreen overlay */
-#splash {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
+playerID = st.text_input("Enter Player ID: ", key="player_id_key")
 
-#splash img {
-    width: 400px;
-    z-index: 10000; /* make sure image is above everything */
-}
+st.set_page_config(page_title="Clash Royale App", layout="centered")
 
-/* Fade out animation */
-.fade-out {
-    animation: fadeout 2s forwards;
-}
-
-@keyframes fadeout {
-    from {opacity: 1;}
-    to {opacity: 0; visibility: hidden;}
-}
-</style>
-
-
-""", unsafe_allow_html=True)
 
 
 if st.button("Predict!"):
