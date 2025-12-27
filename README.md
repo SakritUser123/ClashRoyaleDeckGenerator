@@ -1,180 +1,86 @@
-# Clash Royale AI Setup Guide
 
-## 📋 Prerequisites
+# 🃏 Clash Royale Deck Generator
 
-- Python 3.8+
-- Clash Royale API Token (get it from https://developer.clashroyale.com/)
+A simple and efficient Clash Royale Deck Generator that helps players create balanced and creative decks automatically. This project is designed to encourage experimentation and improve deck-building skills rather than relying only on meta decks.
 
-## 🚀 Quick Start
+## 🚀 Features
+Generates valid 8-card Clash Royale decks
 
-### 1. Clone/Setup the Project
-```bash
-cd /Users/kavithakesavalu/clashRoyaleAI
-```
+Focuses on balance and synergy
 
-### 2. Get Your API Token
-1. Visit https://developer.clashroyale.com/
-2. Sign up or login
-3. Create an API token
-4. Copy your token
+Optional average elixir cost limits
 
-### 3. Set Environment Variable
-```bash
-export CLASH_ROYALE_API_TOKEN='your_token_here'
-```
+Randomized yet playable deck generation
 
-### 4. Run Both Services
-```bash
-chmod +x run.sh
-./run.sh
-```
+Easy to customize and extend
 
-Or run them separately:
+## 🛠️ How It Works
 
-#### Terminal 1 - Start FastAPI Backend:
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-export CLASH_ROYALE_API_TOKEN='your_token_here'
-python3 api.py
-```
+-Clash Royale cards are organized into categorized pools (win conditions, spells, defense, support, cycle, etc.).
 
-FastAPI will be available at: `http://localhost:8000`
+-The generator selects cards according to predefined balancing rules.
 
-#### Terminal 2 - Start Streamlit Frontend:
-```bash
-source venv/bin/activate
-streamlit run app.py
-```
+-Logic ensures decks are reasonable and usable in real matches.
 
-Streamlit will be available at: `http://localhost:8501`
+-Results are presented in a clean, readable format.
 
-## 📚 API Documentation
+## 📦 Example Output
+- Hog Rider
+- Musketeer
+- Valkyrie
+- Cannon
+- Fireball
+- The Log
+- Skeletons
+- Ice Spirit
 
-### Available Endpoints
 
-**FastAPI Backend (http://localhost:8000)**
+Average Elixir Cost: 2.9
 
-- `GET /` - Root endpoint with API info
-- `GET /health` - Health check
-- `GET /api/cards` - Get all Clash Royale cards
-- `GET /api/player/{playerTag}` - Get player info
-- `GET /api/player/{playerTag}/battles` - Get player battle history
-- `GET /api/tools` - Get LLM tool definitions
-- `POST /api/process-tool-call` - Process LLM tool calls
 
-### Example API Calls
+## 🧑‍💻 Installation
 
-**Get Cards:**
-```bash
-curl http://localhost:8000/api/cards
-```
+git clone https://github.com/SakritUser123/ClashRoyaleDeckGenerator.git
 
-**Get Player Info:**
-```bash
-curl http://localhost:8000/api/player/%23Y92P0L2
-```
-(Note: URL-encode the # as %23)
+cd ClashRoyaleDeckGenerator
 
-**Get Battle History:**
-```bash
-curl http://localhost:8000/api/player/%23Y92P0L2/battles
-```
+Run the generator:
 
-**Get LLM Tools:**
-```bash
-curl http://localhost:8000/api/tools
-```
+python main.py
 
-## 🤖 Using with LLM
 
-The `/api/tools` endpoint provides tool definitions compatible with Claude, ChatGPT, and other LLMs. You can use these tools in your LLM prompts to:
+## 🔧 Customization
 
-1. Get all available cards
-2. Look up player information
-3. Fetch player battle history
+You can easily modify:
 
-### Tool Definitions
+- Card pools and categories
 
-Three tools are available:
-- `get_clash_royale_cards` - No parameters needed
-- `get_player_info` - Requires `playerTag` (e.g., "#Y92P0L2")
-- `get_player_battles` - Requires `playerTag`
+- Deck generation rules
 
-## 🏗️ Architecture
+- Elixir cost constraints
 
-```
-┌─────────────────┐
-│  Streamlit App  │ (Port 8501)
-│   (Frontend)    │
-└────────┬────────┘
-         │ HTTP requests
-         │
-┌────────▼────────────────┐
-│   FastAPI Backend       │ (Port 8000)
-│  - Cards API            │
-│  - Player API           │
-│  - Battles API          │
-│  - LLM Tools            │
-└────────┬────────────────┘
-         │
-┌────────▼────────────────┐
-│  Clash Royale API       │
-│  (api.clashroyale.com)  │
-└─────────────────────────┘
-```
+- Output formatting
 
-## 🔑 API Token Safety
 
-⚠️ **Never commit your API token to git!**
+## 📈 Future Improvements
 
-Add to `.gitignore`:
-```
-.env
-*.env
-.env.local
-```
+- Meta-aware deck generation
 
-Use environment variables:
-```bash
-export CLASH_ROYALE_API_TOKEN='your_token'
-```
+- Card synergy scoring
 
-Or create a `.env` file:
-```
-CLASH_ROYALE_API_TOKEN=your_token_here
-```
+- Web-based interface
 
-And load it in your app with `python-dotenv`.
+- Clash Royale API integration
 
-## 🐛 Troubleshooting
+- Arena and card-level filtering
 
-**Connection refused (FastAPI)**
-- Make sure FastAPI is running: `python3 api.py`
-- Check port 8000 is not in use: `lsof -i :8000`
 
-**Streamlit can't connect to API**
-- Ensure both services are running
-- Check `API_BASE_URL = "http://localhost:8000"` in app.py
+## ⚠️ Disclaimer
 
-**401 Unauthorized from Clash Royale**
-- Verify your API token is correct
-- Check token hasn't expired
-- Re-create token if needed
+This project is not affiliated with Supercell.
+Clash Royale and its assets are trademarks of Supercell.
 
-**Rate limiting**
-- Clash Royale API has rate limits
-- Add delays between requests if needed
+## ⭐ Contributing
 
-## 📝 Next Steps
-
-1. Integrate with your LLM of choice (Claude, ChatGPT, etc.)
-2. Build deck generation logic based on player data
-3. Add caching for frequently requested data
-4. Implement error handling and retries
-5. Add logging for debugging
-
----
-
-Happy clash! 🏰🎯
+Contributions are welcome!
+Fork the repository and submit a pull request.
