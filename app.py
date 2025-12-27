@@ -1,29 +1,58 @@
 import streamlit as st
+import time
 from urllib.request import urlopen
 from PIL import Image
-import time
-st.header(" Clash Royale Deck Generator AI")
 
-
-
-
-url = "https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/refs/heads/main/colored-logo.png"
-image = Image.open(urlopen(url))
-
-st.image(image, width=400)
-time.sleep(2)  # Show for 2 seconds
-st.empty()  # Clear the logo
-
-import streamlit as st
-
-playerID = st.text_input("Enter Player ID: ", key="player_id_key")
-
+# IMPORTANT: page config must be FIRST
 st.set_page_config(page_title="Clash Royale App", layout="centered")
 
+# ---- SPLASH SCREEN ----
+splash = st.empty()
 
+splash.markdown("""
+<style>
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeout 2s forwards;
+    animation-delay: 2s;
+}
+
+#splash img {
+    width: 400px;
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
+}
+</style>
+
+<div id="splash">
+    <img src="https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/main/colored-logo.png">
+</div>
+""", unsafe_allow_html=True)
+
+# Keep splash visible
+time.sleep(4)
+
+# Remove splash
+splash.empty()
+
+# ---- MAIN APP ----
+st.header("Clash Royale Deck Generator AI")
+
+playerID = st.text_input("Enter Player ID:")
 
 if st.button("Predict!"):
-   
     if playerID:
         st.write(f"You submitted: {playerID}")
     else:
@@ -31,5 +60,12 @@ if st.button("Predict!"):
 
 st.header("Rate the output of the model")
 
-rating = st.slider("Rate The ouput of the model", min_value=0, max_value=10, value=1, step=1)
+rating = st.slider(
+    "Rate the output of the model",
+    min_value=0,
+    max_value=10,
+    value=1,
+    step=1
+)
+
 st.write(f"Your rating is {rating}")
