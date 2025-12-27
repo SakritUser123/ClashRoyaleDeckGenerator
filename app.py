@@ -22,12 +22,18 @@ splash.markdown("""
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    animation: fadeout 2s forwards;
+    animation: fadeout 3s ease-in forwards;
     animation-delay: 2s;
 }
 
 #splash img {
     width: 400px;
+    animation: fadein 0.5s ease-in forwards;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes fadeout {
@@ -41,8 +47,8 @@ splash.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Keep splash visible
-time.sleep(4)
+# Keep splash visible during animation
+time.sleep(5)
 
 # Remove splash
 splash.empty()
