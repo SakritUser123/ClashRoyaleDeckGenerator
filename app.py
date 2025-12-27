@@ -9,46 +9,60 @@ st.set_page_config(page_title="Clash Royale App", layout="centered")
 # ---- SPLASH SCREEN ----
 splash = st.empty()
 
-splash.markdown("""
-<style>
-#splash {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    animation: fadeout 3s ease-in forwards;
-    animation-delay: 2s;
-}
+with splash.container():
+    st.markdown("""
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .splash-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    
+    .splash-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        animation: fadeInImage 0.8s ease-in forwards, fadeOutImage 0.8s ease-out forwards 2.5s;
+    }
+    
+    @keyframes fadeInImage {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes fadeOutImage {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+    </style>
+    
+    <div class="splash-container">
+        <img class="splash-image" src="https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/main/colored-logo.png">
+    </div>
+    """, unsafe_allow_html=True)
 
-#splash img {
-    width: 400px;
-    animation: fadein 0.5s ease-in forwards;
-}
-
-@keyframes fadein {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeout {
-    from { opacity: 1; }
-    to { opacity: 0; visibility: hidden; }
-}
-</style>
-
-<div id="splash">
-    <img src="https://raw.githubusercontent.com/SakritUser123/ClashRoyaleDeckGenerator/main/colored-logo.png">
-</div>
-""", unsafe_allow_html=True)
-
-# Keep splash visible during animation
-time.sleep(5)
+# Wait for animations to complete
+time.sleep(3.5)
 
 # Remove splash
 splash.empty()
