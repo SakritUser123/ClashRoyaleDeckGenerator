@@ -1,0 +1,375 @@
+================================================================================
+                    CLASH ROYALE AI - QUICK REFERENCE
+================================================================================
+
+🎯 YOUR QUESTION: "Where is the GPT model invoked in the LLM call?"
+
+📍 ANSWER IN 3 SECONDS:
+   File: llm_integration.py
+   Line: ~115
+   Code: client.messages.create(model="claude-3-5-sonnet-20241022", ...)
+
+================================================================================
+                            FILE STRUCTURE
+================================================================================
+
+clashRoyaleAI/
+├── 🐍 MAIN APPLICATION
+│   ├── app.py ..................... Streamlit UI (Port 8501)
+│   ├── api.py ..................... FastAPI Backend (Port 8000)
+│   └── llm_integration.py ......... 🎯 CLAUDE INVOKED HERE
+│
+├── 📚 DOCUMENTATION
+│   ├── DOCUMENTATION.md ........... Complete overview (START HERE)
+│   ├── ANSWER_WHERE_CLAUDE_IS_INVOKED.md ... Direct answer
+│   ├── CLAUDE_SETUP.md ........... 5-minute setup
+│   ├── WHERE_CLAUDE_INVOKED.md ... Detailed breakdown
+│   ├── LLM_INTEGRATION.md ........ Full API documentation
+│   ├── ARCHITECTURE.md ........... Visual diagrams
+│   ├── PROJECT_INDEX.md ......... File reference
+│   └── QUICK_REFERENCE.txt ....... This file
+│
+├── ⚙️ CONFIG
+│   ├── requirements.txt
+│   ├── run.sh
+│   └── .env.example
+│
+└── 📁 Generated
+    └── venv/ (after running setup)
+
+================================================================================
+                         CLAUDE INVOCATION
+================================================================================
+
+WHERE:          llm_integration.py, line ~115
+FUNCTION:       chat_with_claude()
+METHOD:         client.messages.create()
+MODEL:          claude-3-5-sonnet-20241022
+
+THE CODE:
+┌─────────────────────────────────────────────────────────────┐
+│ response = client.messages.create(                          │
+│     model="claude-3-5-sonnet-20241022",                     │
+│     max_tokens=2048,                                        │
+│     system=system_prompt,                                   │
+│     tools=CLASH_ROYALE_TOOLS,  # 3 tools available          │
+│     messages=messages                                       │
+│ )                                                            │
+│ 🎯 CLAUDE IS INVOKED HERE ⬆️                                 │
+└─────────────────────────────────────────────────────────────┘
+
+CALLED FROM:
+  api.py:192  → /api/llm/chat
+  api.py:216  → /api/llm/analyze-player
+  api.py:234  → /api/llm/compare-players
+  api.py:252  → /api/llm/card-analysis
+
+CALLED BY:
+  Streamlit UI in app.py
+  ↓
+  FastAPI endpoints
+  ↓
+  llm_integration.py functions
+  ↓
+  chat_with_claude()
+  ↓
+  client.messages.create() ← CLAUDE HERE
+
+================================================================================
+                           CALL STACK
+================================================================================
+
+1. User: Clicks "Analyze Player" in Streamlit
+                    ↓
+2. Streamlit: requests.post("/api/llm/analyze-player")
+                    ↓
+3. FastAPI: @app.post("/api/llm/analyze-player")
+                    ↓
+4. Import: from llm_integration import analyze_player_for_deck_suggestion
+                    ↓
+5. Call: response = analyze_player_for_deck_suggestion(player_tag)
+                    ↓
+6. Function: def analyze_player_for_deck_suggestion():
+                    ↓
+7. Call: response, tool_calls = chat_with_claude(user_message)
+                    ↓
+8. Function: def chat_with_claude(user_message, system_prompt):
+                    ↓
+9. 🎯 CLAUDE: response = client.messages.create(...)
+                    ↓
+10. Claude: Receives message + 3 tools + system prompt
+                    ↓
+11. Claude: Decides to use tools, returns tool_use response
+                    ↓
+12. Execute: process_tool_call() for each tool Claude requested
+                    ↓
+13. Results: Send results back to Claude
+                    ↓
+14. Claude: Analyzes results, final_response ready
+                    ↓
+15. Return: (final_response, tool_calls_made)
+                    ↓
+16. FastAPI: Returns JSON to Streamlit
+                    ↓
+17. Streamlit: Displays Claude's response + tools used
+
+================================================================================
+                         CLAUDE TOOLS
+================================================================================
+
+AVAILABLE TOOLS:
+
+1. get_clash_royale_cards
+   Description: Get all available Clash Royale cards
+   Parameters: None
+   Returns: List of all cards with stats
+
+2. get_player_info
+   Description: Get detailed player information
+   Parameters: playerTag (string, e.g., "#Y92P0L2")
+   Returns: Player data (name, trophies, level, cards, stats)
+
+3. get_player_battles
+   Description: Get recent battle history
+   Parameters: playerTag (string)
+   Returns: Last 20 battles with results, decks, opponents
+
+HOW CLAUDE USES THEM:
+- User asks a question
+- Claude sees the 3 tools
+- Claude decides which tools are needed
+- We execute what Claude requests
+- Results sent back to Claude
+- Claude analyzes and responds
+
+================================================================================
+                         QUICK START
+================================================================================
+
+1. GET API KEYS:
+   - Clash Royale: https://developer.clashroyale.com/
+   - Anthropic (Claude): https://console.anthropic.com/
+
+2. SET ENVIRONMENT:
+   export CLASH_ROYALE_API_TOKEN='your_token'
+   export ANTHROPIC_API_KEY='your_key'
+
+3. INSTALL:
+   pip install -r requirements.txt
+
+4. RUN SERVICES:
+   Terminal 1: python3 api.py
+   Terminal 2: streamlit run app.py
+
+5. USE:
+   Go to http://localhost:8501
+   Click "AI Assistant" tab
+   Start chatting with Claude!
+
+================================================================================
+                      KEY DOCUMENTATION
+================================================================================
+
+📖 DOCUMENTATION FILES (In reading order):
+
+1. DOCUMENTATION.md (YOU ARE HERE)
+   └─ Complete overview of everything
+
+2. ANSWER_WHERE_CLAUDE_IS_INVOKED.md
+   └─ Direct answer to your question
+
+3. CLAUDE_SETUP.md
+   └─ 5-minute setup guide
+
+4. WHERE_CLAUDE_INVOKED.md
+   └─ Detailed code breakdown with line numbers
+
+5. LLM_INTEGRATION.md
+   └─ Complete API documentation
+
+6. ARCHITECTURE.md
+   └─ System diagrams and flows
+
+7. PROJECT_INDEX.md
+   └─ File reference guide
+
+================================================================================
+                          KEY FILES
+================================================================================
+
+🔴 llm_integration.py (MOST IMPORTANT)
+   ├─ Line 10: Create Anthropic client
+   ├─ Lines 17-50: Define CLASH_ROYALE_TOOLS
+   ├─ Lines 100-160: chat_with_claude() function
+   ├─ Line 115: 🎯 CLAUDE INVOCATION
+   ├─ Lines 120-160: Handle tool use
+   └─ Lines 175-190: Helper functions
+
+🟢 api.py
+   ├─ Line 192: POST /api/llm/chat
+   ├─ Line 216: POST /api/llm/analyze-player
+   ├─ Line 234: POST /api/llm/compare-players
+   ├─ Line 252: GET /api/llm/card-analysis
+   └─ Call llm_integration.py functions
+
+🔵 app.py
+   ├─ Line 235: Chat UI with Claude
+   ├─ Line 290: Player Analysis with Claude
+   ├─ And more AI features
+   └─ Calls FastAPI endpoints
+
+================================================================================
+                        CLAUDE MODEL DETAILS
+================================================================================
+
+Model: claude-3-5-sonnet-20241022
+Provider: Anthropic
+Type: Large Language Model (LLM)
+SDK: anthropic Python package
+
+CAPABILITIES:
+✅ Multi-turn conversations
+✅ Tool use (automatic function calling)
+✅ System prompts (behavior instructions)
+✅ Large context (200,000 tokens)
+✅ Streaming support
+
+PARAMETERS:
+- model: Which Claude model to use
+- system: System prompt (tells Claude how to behave)
+- tools: Available tools Claude can use
+- messages: Conversation history
+- max_tokens: Maximum response length
+
+TO CHANGE MODEL (edit llm_integration.py line 115):
+- claude-3-5-sonnet-20241022 (current - balanced)
+- claude-3-opus-20250219 (most powerful)
+- claude-3-haiku-20240307 (fastest, cheapest)
+
+================================================================================
+                      FASTAPI ENDPOINTS
+================================================================================
+
+DATA ENDPOINTS:
+GET  http://localhost:8000/api/cards
+GET  http://localhost:8000/api/player/{playerTag}
+GET  http://localhost:8000/api/player/{playerTag}/battles
+GET  http://localhost:8000/api/tools
+
+LLM ENDPOINTS (NEW - Uses Claude):
+POST http://localhost:8000/api/llm/chat
+POST http://localhost:8000/api/llm/analyze-player
+POST http://localhost:8000/api/llm/compare-players
+GET  http://localhost:8000/api/llm/card-analysis
+
+HEALTH:
+GET  http://localhost:8000/health
+
+================================================================================
+                       DEPENDENCIES
+================================================================================
+
+INSTALLED VIA requirements.txt:
+
+Core:
+- fastapi==0.104.1 ........... Web framework
+- uvicorn==0.24.0 ........... ASGI server
+- streamlit==1.28.1 ......... UI framework
+- anthropic==0.25.1 ......... Claude API 🎯
+- httpx==0.25.1 ............ Async HTTP
+- requests==2.31.0 ......... HTTP requests
+- pydantic==2.5.0 .......... Data validation
+- python-dotenv==1.0.0 ..... Environment vars
+
+INSTALL:
+pip install -r requirements.txt
+
+================================================================================
+                       TROUBLESHOOTING
+================================================================================
+
+❌ "ANTHROPIC_API_KEY not set"
+✅ export ANTHROPIC_API_KEY='your_key'
+
+❌ "Connection refused" to FastAPI
+✅ Make sure api.py is running on port 8000
+
+❌ "Claude not responding"
+✅ Check API key is valid
+✅ Check you have API quota
+
+❌ "Tools not being called"
+✅ Check Clash Royale API token is valid
+✅ Look at error response from Claude
+
+❌ "Timeout errors"
+✅ Some analyses take time with multiple tools
+✅ Claude may be rate limited
+
+❌ "404 Not Found"
+✅ Make sure both FastAPI and Streamlit are running
+✅ Check API endpoint spelling
+
+================================================================================
+                      CHEAT SHEET
+================================================================================
+
+RUN EVERYTHING:
+$ chmod +x run.sh
+$ ./run.sh
+
+RUN MANUALLY:
+Terminal 1: $ python3 api.py
+Terminal 2: $ streamlit run app.py
+
+TEST CLAUDE DIRECTLY:
+$ curl -X POST "http://localhost:8000/api/llm/chat" \
+  -G --data-urlencode "message=What is the best meta?"
+
+FIND CLAUDE INVOCATION:
+$ grep -n "client.messages.create" llm_integration.py
+Output: 115:        response = client.messages.create(
+
+CHANGE MODEL:
+Edit: llm_integration.py line 115
+Change: model="claude-3-5-sonnet-20241022"
+
+ADD NEW TOOL:
+Edit: llm_integration.py lines 17-50 (CLASH_ROYALE_TOOLS)
+
+================================================================================
+                         SUMMARY
+================================================================================
+
+🎯 CLAUDE INVOCATION LOCATION:
+   File: llm_integration.py
+   Line: 115
+   Code: client.messages.create(...)
+
+📍 CALL PATH:
+   Streamlit UI
+   → FastAPI endpoint
+   → llm_integration function
+   → chat_with_claude()
+   → client.messages.create()
+   → Anthropic API
+
+🤖 CLAUDE MODEL:
+   claude-3-5-sonnet-20241022
+
+🔧 TOOLS AVAILABLE:
+   1. get_clash_royale_cards
+   2. get_player_info
+   3. get_player_battles
+
+✨ HOW IT WORKS:
+   User asks → Claude receives question + tools → Claude uses tools → 
+   Results sent to Claude → Claude analyzes → Response returned → 
+   User sees answer
+
+================================================================================
+
+For complete details, see DOCUMENTATION.md or WHERE_CLAUDE_INVOKED.md
+
+🚀 Happy clashing!
+
